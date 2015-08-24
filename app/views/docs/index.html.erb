@@ -1,0 +1,57 @@
+<div class="container">
+
+  <div class="row">
+    <h1>Docs#index</h1>
+  </div>
+
+
+  <div class="row">
+    <%= form_tag docs_path, method: :get do %>
+      <div class="col-md-9">
+         <%= text_field_tag :q,params[:q] ,class: "form-control" %>
+      </div>
+
+      <div class="col-md-1">
+        <%= select_tag :choice, options_for_select([['All', "all"], ['firstname', "firstname"], 
+        ['lastname', "lastname"],['address', "address"], ['phone', "phone"]],selected: params[:choice] ) %>
+      </div>
+
+      <div class="col-md-1">
+        <%= button_tag 'Search',:class => "btn btn-default", name: nil %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row" style="margin-top:36px;">
+      <%= link_to "Add" , new_doc_path ,:class => "btn btn-primary"%>
+  </div>
+
+  <div class="row">
+    <table class="table table-hover">
+      <thead>
+        <th>No</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Year</th>
+        <th>Publisher</th>
+        <th>Tools</th>
+      </thead>
+      <tbody>
+        <% @docs.each_with_index do |doc,index| %>
+        <tr>
+          <td data-link="<%= doc_path(doc.id) %>" class="doc-tr"><%= index+1 %></td></a>
+          <td data-link="<%= doc_path(doc.id) %>" class="doc-tr"><%= doc.name  %></td>
+          <td data-link="<%= doc_path(doc.id) %>" class="doc-tr"><%= doc.author  %></td>
+          <td data-link="<%= doc_path(doc.id) %>" class="doc-tr"><%= doc.year  %></td>
+          <td data-link="<%= doc_path(doc.id) %>" class="doc-tr"><%= doc.publisher  %></td>
+          <td>
+            <%= link_to "Edit",   edit_doc_path(doc.id) ,class: "btn btn-warning" %>
+            <%= link_to 'Delete', doc_path(doc.id), method: :delete,
+             data: { confirm: 'Are you sure?' } ,class: "btn btn-danger"%>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
