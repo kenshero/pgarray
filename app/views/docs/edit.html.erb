@@ -26,18 +26,6 @@
     <%= f.text_field :words ,class: "form-control" ,placeholder: "use comma ',' for Add tag" %>
   </div>
 
-<!--   <div class="form-group">
-    <label for="words">Keywords :</label>
-    <div id="tags">
-     <% if @doc.words.length != 0 %>
-       <% @doc.words.each_with_index do |word , index| %>
-          <span class="tag"> <%= word %></span>
-       <% end %>
-     <% end %>
-    <%= text_field_tag "doc[words][]" ,"" ,class: "form-control" ,placeholder: "use comma ',' for Add tag" %>
-    </div>
-  </div>
- -->
   <div class="form-group">
     <label for="words">Author :</label>
     <%= f.text_field :author ,class: "form-control" %>
