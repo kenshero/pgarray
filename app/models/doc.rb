@@ -18,9 +18,9 @@ class Doc < ActiveRecord::Base
   validates_attachment :pdf, content_type: { content_type: "application/pdf" }
 
     def s3_credentials
-      {:bucket => "rails-img", 
-       :access_key_id => "AKIAIABMSUNT5RTAW2GQ",
-       :secret_access_key => "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"
+      {:bucket => "xxxxxxxx", 
+       :access_key_id => "xxxxxxxx",
+       :secret_access_key => "xxxxxxxx"
       }
     end
 
