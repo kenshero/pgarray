@@ -17,10 +17,46 @@ module Journals
         )
       end
 
+      def self.journal_search_filter(query,choice,from,to)
+        puts "from = #{from}"
+        puts "to = #{to}"
+
+        if to == ""
+          to = "3000"
+        end
+
+        __elasticsearch__.search(
+          {
+            query: {
+              bool: {
+                must: [
+                  {
+                    multi_match: {
+                      query: query,
+                      type: "phrase_prefix",
+                      fields: field_search(choice)
+                    }
+                  },
+                  {
+                    range: {
+                      year:{
+                        from: from,
+                        to: to,
+                        format: "dd/MM/yyyy||yyyy"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        )
+      end
+
       def self.field_search(choice)
         case choice
         when "all"
-          ['words']
+          ['name', 'words', 'author','year','publisher']
         when "firstname"
           ['firstname']
         when "lastname"
@@ -66,7 +102,7 @@ end
 # # # # Delete the previous Customers index in Elasticsearch
 # Doc.__elasticsearch__.client.indices.delete index: Doc.index_name rescue nil
 
-# # # Create the new index with the new mapping
+# # Create the new index with the new mapping
 # Doc.__elasticsearch__.client.indices.create \
 #   index: Doc.index_name,
 #   body: { settings: Doc.settings.to_hash, mappings: Doc.mappings.to_hash }

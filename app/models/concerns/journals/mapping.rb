@@ -8,7 +8,8 @@ module Journals
           indexes :name
           indexes :pdf
           indexes :words
-          # indexes :phone
+          indexes :year
+          indexes :author
           # indexes :coordinates, type: 'geo_point'
           # indexes :company_number
           # indexes :main_phone_number, type: 'string',  index: :not_analyzed

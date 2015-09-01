@@ -22,8 +22,13 @@
   </div>
 
   <div class="form-group">
-    <label for="words">Keywords :</label>
-    <%= text_field_tag "doc[words][]" ,"" ,class: "form-control" ,placeholder: "use comma ',' for split" %>
+    <div class="input_fields_wrap">
+      <label for="words">Keywords :</label>
+      <div>
+      <a href="#" class="add_field_button">Add More Fields</a>
+      <br>
+      <input type="text" name="doc[words][]" id="doc_words_" value="" class="form-word">
+    </div>
   </div>
 
   <div class="form-group">
@@ -43,7 +48,7 @@
 
   <div class="form-group">
     <label for="words">Description :</label>
-    <%= f.text_area :description  ,class: "form-control",rows: "4" %>
+    <%= f.text_area :description  ,class: "form-control",rows: "6" %>
   </div>
 
   <div class="form-group">

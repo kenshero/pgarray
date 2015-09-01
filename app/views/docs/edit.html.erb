@@ -22,22 +22,17 @@
   </div>
 
   <div class="form-group">
-    <label for="words">Keywords :</label>
-    <%= f.text_field :words ,class: "form-control" ,placeholder: "use comma ',' for Add tag" %>
+    <div class="input_fields_wrap">
+      <label for="words">Keywords :</label>
+      <a href="#" class="add_field_button">Add More Fields</a>
+      <% @doc.words.each do |word| %>
+        <div>
+          <input type="text" name="doc[words][]" id="doc_words_" value="<%= word %>"
+          class="form-word" /><a href="#" class="remove_field">Remove</a>
+        </div>
+      <% end %>
   </div>
 
-<!--   <div class="form-group">
-    <label for="words">Keywords :</label>
-    <div id="tags">
-     <% if @doc.words.length != 0 %>
-       <% @doc.words.each_with_index do |word , index| %>
-          <span class="tag"> <%= word %></span>
-       <% end %>
-     <% end %>
-    <%= text_field_tag "doc[words][]" ,"" ,class: "form-control" ,placeholder: "use comma ',' for Add tag" %>
-    </div>
-  </div>
- -->
   <div class="form-group">
     <label for="words">Author :</label>
     <%= f.text_field :author ,class: "form-control" %>
@@ -55,11 +50,16 @@
 
   <div class="form-group">
     <label for="words">Description :</label>
-    <%= f.text_area :description  ,class: "form-control",rows: "4" %>
+    <%= f.text_area :description  ,class: "form-control",rows: "6" %>
   </div>
 
   <div class="form-group">
-    <label for="exampleInputFile">File input</label>
+    <label for="words">Cover file :</label>
+    <%= image_tag @doc.pdf.url(:pdf_thumbnail) %>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputFile">File input update :</label>
     <%= f.file_field :pdf %>
     <p class="help-block">PDF ONLY !</p>
   </div>

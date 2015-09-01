@@ -4,26 +4,39 @@
     <h1>Docs#index</h1>
   </div>
 
-
+<%= form_tag docs_path, method: :get do %>
   <div class="row">
-    <%= form_tag docs_path, method: :get do %>
-      <div class="col-md-9">
-         <%= text_field_tag :q,params[:q] ,class: "form-control" %>
-      </div>
+    <div class="col-md-9">
+       <%= text_field_tag :q,params[:q] ,class: "form-control" %>
+    </div>
 
-      <div class="col-md-1">
-        <%= select_tag :choice, options_for_select([['All', "all"], ['firstname', "firstname"], 
-        ['lastname', "lastname"],['address', "address"], ['phone', "phone"]],selected: params[:choice] ) %>
-      </div>
+    <div class="col-md-1">
+      <%= select_tag :choice, options_for_select([['All', "all"], ['firstname', "firstname"], 
+      ['lastname', "lastname"],['address', "address"], ['phone', "phone"]],selected: params[:choice] ) %>
+    </div>
 
-      <div class="col-md-1">
-        <%= button_tag 'Search',:class => "btn btn-default", name: nil %>
-      </div>
-    <% end %>
+    <div class="col-md-1">
+      <%= button_tag 'Search',:class => "btn btn-default", name: "btn-search" %>
+    </div>
   </div>
 
+  <div class="row form-inline" style="margin-top:36px; margin-bottom:36px;">
+    <div class="form-group">
+      <label>From :</label>
+      <%= text_field_tag :from,params[:from] ,class: "form-control" ,placeholder: "year ex. 2012" %>
+    </div>
+
+    <div class="form-group">
+      <label>To :</label>
+      <%= text_field_tag :to,params[:to] ,class: "form-control"  ,placeholder: "year ex. 2014"%>
+    </div>
+
+    <%= button_tag 'Filter',:class => "btn btn-success", name: "btn-filter" %>
+  </div>
+<% end %>
+
   <div class="row" style="margin-top:36px;">
-      <%= link_to "Add" , new_doc_path ,:class => "btn btn-primary"%>
+      <%= link_to "Add" , new_doc_path ,:class => "btn btn-primary" , id: "btn-add"%>
   </div>
 
   <div class="row">

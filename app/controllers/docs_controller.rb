@@ -1,7 +1,13 @@
 class DocsController < ApplicationController
   def index
     if params[:q].present?
-      @docs = Doc.journal_search(params[:q],params[:choice]).results
+      if params[:from].present?
+        from = params[:from]
+        to   = params[:to]
+        @docs = Doc.journal_search_filter(params[:q],params[:choice],from,to).results
+      else
+        @docs = Doc.journal_search(params[:q],params[:choice]).results
+      end
       # doc_search = params[:q]
       # @docs = Doc.where(" '#{doc_search}' % ANY (words)")
     else

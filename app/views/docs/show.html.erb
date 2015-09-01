@@ -38,9 +38,14 @@
       <%= @doc.publisher %>
     </div>
 
+  <div class="form-group">
+    <label for="words">Cover file :</label>
+    <%= image_tag @doc.pdf.url(:pdf_thumbnail) %>
+  </div>
+
     <div class="form-group">
       <label>File PDF :</label>
-      <%= link_to @doc.name ,@doc.pdf.url %>
+      <%= link_to @doc.name+" (Download)" ,@doc.pdf.url %>
     </div>
 
     <hr>
