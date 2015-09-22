@@ -56,7 +56,7 @@ module Journals
       def self.field_search(choice)
         case choice
         when "all"
-          ['name', 'words', 'author','year','publisher']
+          ['author','name', 'words','year','publisher']
         when "firstname"
           ['firstname']
         when "lastname"
@@ -99,10 +99,11 @@ end
 
 # Doc.__elasticsearch__.client.cluster.health
 # Doc.__elasticsearch__.client = Elasticsearch::Client.new host: 'localhost'
+
+
 # # # # Delete the previous Customers index in Elasticsearch
 # Doc.__elasticsearch__.client.indices.delete index: Doc.index_name rescue nil
 
-# # Create the new index with the new mapping
 # Doc.__elasticsearch__.client.indices.create \
 #   index: Doc.index_name,
 #   body: { settings: Doc.settings.to_hash, mappings: Doc.mappings.to_hash }

@@ -5,11 +5,11 @@ module Journals
       index_name "#{Rails.env}_journals"
       mapping do
           indexes :id, index: :not_analyzed
-          indexes :name
+          indexes :name,  boost: 9
           indexes :pdf
-          indexes :words
+          indexes :words, boost: 10
           indexes :year
-          indexes :author
+          indexes :author,  boost: 8
           # indexes :coordinates, type: 'geo_point'
           # indexes :company_number
           # indexes :main_phone_number, type: 'string',  index: :not_analyzed

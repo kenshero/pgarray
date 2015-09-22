@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 
+gem 'httparty'
 gem 'jquery-turbolinks'
 gem 'elasticsearch-model'
 gem 'bootstrap-sass', '~> 3.3.5'

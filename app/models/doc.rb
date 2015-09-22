@@ -5,24 +5,24 @@ class Doc < ActiveRecord::Base
   include Journals::Searchable
   include Journals::Mapping
   
-  # has_attached_file :pdf, styles: {thumbnail: "60x60#"}
-  # validates_attachment :pdf, content_type: { content_type: "application/pdf" }
-
-  has_attached_file :pdf,
-    :styles => { pdf_thumbnail: ["60x60#", :jpg] },
-    :storage => :s3,
-    :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
-    :url =>':s3_domain_url',
-    :path => '/:class/:attachment/:id_partition/:style/:filename'
-
+  has_attached_file :pdf, styles: { pdf_thumbnail: ["60x60#", :jpg] }
   validates_attachment :pdf, content_type: { content_type: "application/pdf" }
 
-    def s3_credentials
-      {:bucket => "xxxxx", 
-       :access_key_id => "xxxxxxxxx",
-       :secret_access_key => "xxxxxxxxxxxx"
-      }
-    end
+  # has_attached_file :pdf,
+  #   :styles => { pdf_thumbnail: ["60x60#", :jpg] },
+  #   :storage => :s3,
+  #   :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
+  #   :url =>':s3_domain_url',
+  #   :path => '/:class/:attachment/:id_partition/:style/:filename'
+
+  # validates_attachment :pdf, content_type: { content_type: "application/pdf" }
+
+  #   def s3_credentials
+  #     {:bucket => "xxxxx", 
+  #      :access_key_id => "xxxxxxxxx",
+  #      :secret_access_key => "xxxxxxxxxxxx"
+  #     }
+  #   end
 
   before_create :cut_whitespace
   before_update :cut_whitespace
@@ -38,6 +38,14 @@ class Doc < ActiveRecord::Base
   # end
 
   def cut_whitespace
+    # puts self.inspect
+    # puts self.image.inspect
+
+    # response = HTTParty.post("http://localhost:9000/upload",
+    # :query => { :pdf => self.image })
+
+    # puts response
+    # error
     input_words = self.words
     input_words.delete_if {|word| word == "" }
   end
